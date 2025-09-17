@@ -1,0 +1,23 @@
+{% extends "_layout.html" %}
+{% block title %}Giriş Yap - NutriChat AI{% endblock %}
+
+{% block content %}
+<div class="page active">
+    <div class="form-container">
+        <div id="login-form">
+            <h2>Oturum Aç</h2>
+            <div class="form-group"><input type="email" id="login-email" placeholder="E-posta" required></div>
+            <div class="form-group"><input type="password" id="login-password" placeholder="Şifre" required></div>
+            <button onclick="auth.login()">Giriş Yap</button>
+            <p class="auth-toggle" onclick="auth.toggleForm()">Hesabınız yok mu? <b>Kayıt Olun</b></p>
+        </div>
+        <div id="signup-form" style="display: none;">
+            <h2>Hesap Oluşturun</h2>
+            <div class="form-group"><input type="email" id="signup-email" placeholder="E-posta" required></div>
+            <div class="form-group"><input type="password" id="signup-password" placeholder="Şifre" required></div>
+            <button onclick="auth.signup()">Kayıt Ol</button>
+            <p class="auth-toggle" onclick="auth.toggleForm()">Zaten hesabınız var mı? <b>Giriş Yapın</b></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!-- Bu sayfa, _layout.html'deki genel iskeleti kullanır -->
+{% extends "_layout.html" %}
+
+<!-- Sayfa başlığını özelleştirir -->
+{% block title %}Ana Sayfa - NutriChat AI{% endblock %}
+
+<!-- Sayfanın ana içeriğini iskeletin içine yerleştirir -->
+{% block content %}
+<div class="page active" id="dashboard-page-body">
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h2>Hoş Geldiniz!</h2>
+            <p class="subtitle">Sağlıklı yaşam yolculuğunuza başlamak için hazırsınız.</p>
+        </header>
+        
+        <div class="dashboard-cards">
+            <!-- Ana Hedef Kartı -->
+            <div class="card">
+                <i class="fa-solid fa-bullseye card-icon"></i>
+                <h3>Ana Hedefiniz</h3>
+                <p id="target-info">Yükleniyor...</p>
+            </div>
+            
+            <!-- Vücut Kitle İndeksi Kartı -->
+            <div class="card">
+                <i class="fa-solid fa-weight-scale card-icon"></i>
+                <h3>Vücut Kitle İndeksi (VKİ)</h3>
+                <p id="bmi-info">Yükleniyor...</p>
+            </div>
+            
+            <!-- Sohbet Asistanı Kartı -->
+            <div class="card quick-start-card">
+                 <i class="fa-solid fa-comments card-icon"></i>
+                <h3>Hızlı Başlangıç</h3>
+                <p>Sohbet asistanına giderek kişiselleştirilmiş öneriler ve tarifler alın.</p>
+                <a href="/uygulama" class="card-button">Sohbete Başla</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

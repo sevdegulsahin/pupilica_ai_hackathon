@@ -1,0 +1,85 @@
+{% extends "_layout.html" %}
+{% block title %}Profil Oluştur - NutriChat AI{% endblock %}
+
+{% block content %}
+<div class="page active" id="profile-page-body">
+    <div class="form-container wizard-container">
+        <!-- İlerleme Çubuğu -->
+        <div class="progress-bar">
+            <div class="progress-step active" data-step="1">1</div>
+            <div class="progress-step" data-step="2">2</div>
+            <div class="progress-step" data-step="3">3</div>
+            <div class="progress-step" data-step="4">4</div>
+        </div>
+
+        <!-- DEĞİŞİKLİK: onsubmit olayını formdan kaldırdık -->
+        <form id="profile-form">
+            <!-- Adım 1: Temel Bilgiler -->
+            <div class="wizard-step active" data-step="1">
+                <h2>Temel Bilgiler</h2>
+                <p class="step-subtitle">Sizi daha yakından tanımak için temel bilgilerinizle başlayalım.</p>
+                <div class="form-grid">
+                    <div class="form-group"><input type="number" id="height" placeholder="Boy (cm)"></div>
+                    <div class="form-group"><input type="number" id="weight" placeholder="Kilo (kg)"></div>
+                    <div class="form-group"><input type="date" id="birth_date"></div>
+                    <div class="form-group">
+                        <select id="gender"><option value="">Cinsiyet...</option><option value="Kadın">Kadın</option><option value="Erkek">Erkek</option></select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adım 2: Yaşam Tarzı -->
+            <div class="wizard-step" data-step="2">
+                <h2>Yaşam Tarzınız</h2>
+                <p class="step-subtitle">Günlük rutinleriniz, hedeflerinize ulaşmanızda önemli bir rol oynar.</p>
+                <div class="form-group">
+                    <label>Aktivite Seviyeniz</label>
+                    <select id="activity_level"><option value="">Seçiniz...</option><option value="sedentary">Hareketsiz (Masa başı iş)</option><option value="lightly_active">Az Hareketli</option><option value="active">Aktif</option><option value="very_active">Çok Aktif</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Ortalama Uyku Süreniz (saat)</label>
+                    <input type="number" id="sleep_hours" placeholder="Örn: 7">
+                </div>
+                 <div class="form-group">
+                    <label>Ana Hedefiniz</label>
+                    <select id="target"><option value="">Seçiniz...</option><option value="kilo verme">Kilo Verme</option><option value="kilo alma">Kilo Alma</option><option value="sağlıklı yaşam">Sağlıklı Yaşam</option><option value="kas kütlesi artırma">Kas Kütlesi Artırma</option></select>
+                </div>
+            </div>
+
+            <!-- Adım 3: Beslenme Alışkanlıkları -->
+            <div class="wizard-step" data-step="3">
+                <h2>Beslenme Alışkanlıkları</h2>
+                <p class="step-subtitle">Size en uygun önerileri sunabilmemiz için damak zevkinizi öğrenelim.</p>
+                <div class="form-group">
+                    <label>Sevmediğiniz veya tüketmediğiniz gıdalar (virgülle ayırın, isteğe bağlı)</label>
+                    <input type="text" id="disliked_foods" placeholder="Örn: pırasa, enginar, brokoli">
+                </div>
+            </div>
+
+            <!-- Adım 4: Sağlık Durumu -->
+            <div class="wizard-step" data-step="4">
+                <h2>Sağlık Durumunuz</h2>
+                <p class="step-subtitle">Bu bilgiler, size güvenli ve etkili öneriler sunmamız için kritik öneme sahiptir.</p>
+                <div class="form-group">
+                    <label>Bilinen bir rahatsızlığınız var mı? (virgülle ayırın)</label>
+                    <input type="text" id="diseases_text" placeholder="Örn: diyabet, yüksek tansiyon">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>Gıda hassasiyetiniz veya alerjiniz var mı?</label>
+                    <div><input type="checkbox" id="allergy_gluten" value="gluten"><label for="allergy_gluten">Gluten</label></div>
+                    <div><input type="checkbox" id="allergy_lactose" value="laktoz"><label for="allergy_lactose">Laktoz</label></div>
+                    <div><input type="checkbox" id="allergy_nuts" value="fındık/fıstık"><label for="allergy_nuts">Fındık/Fıstık</label></div>
+                </div>
+            </div>
+            
+            <!-- Navigasyon Butonları -->
+            <div class="wizard-navigation">
+                <button type="button" id="prevBtn" onclick="profile.navigate(-1)">Geri</button>
+                <button type="button" id="nextBtn" onclick="profile.navigate(1)">İleri</button>
+                <!-- DEĞİŞİKLİK: type="button" ve onclick olayını doğrudan butona ekledik -->
+                <button type="button" id="submitBtn" style="display:none;" onclick="profile.update()">Profili Kaydet ve Başla</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

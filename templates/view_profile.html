@@ -1,0 +1,45 @@
+{% extends "_layout.html" %}
+{% block title %}Profilim - NutriChat AI{% endblock %}
+
+{% block content %}
+<div class="page active" id="view-profile-page-body">
+    <div class="profile-view-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <h2>Profil Bilgileriniz</h2>
+            <!-- YENİ: E-posta adresi doğrudan buraya yazdırılıyor -->
+            <p class="subtitle">{{ user_email }}</p>
+        </div>
+        
+        <div class="profile-details-grid">
+            <!-- Temel Bilgiler -->
+            <div class="detail-card">
+                <h4>Temel Bilgiler</h4>
+                <p><strong>Boy:</strong> <span id="height-info">Yükleniyor...</span> cm</p>
+                <p><strong>Kilo:</strong> <span id="weight-info">Yükleniyor...</span> kg</p>
+                <p><strong>Cinsiyet:</strong> <span id="gender-info">Yükleniyor...</span></p>
+            </div>
+            
+            <!-- Yaşam Tarzı -->
+            <div class="detail-card">
+                <h4>Yaşam Tarzı</h4>
+                <p><strong>Aktivite Seviyesi:</strong> <span id="activity-info">Yükleniyor...</span></p>
+                <p><strong>Ortalama Uyku:</strong> <span id="sleep-info">Yükleniyor...</span> saat</p>
+                <p><strong>Ana Hedef:</strong> <span id="target-info">Yükleniyor...</span></p>
+            </div>
+            
+            <!-- Sağlık Durumu -->
+            <div class="detail-card full-width">
+                <h4>Sağlık Durumu</h4>
+                <p><strong>Bilinen Rahatsızlıklar:</strong> <span id="diseases-info">Yükleniyor...</span></p>
+                <p><strong>Gıda Alerjileri:</strong> <span id="allergies-info">Yükleniyor...</span></p>
+                <p><strong>Sevilmeyen Gıdalar:</strong> <span id="disliked-info">Yükleniyor...</span></p>
+            </div>
+        </div>
+
+        <a href="/profil/duzenle" class="edit-profile-button">Profili Düzenle</a>
+    </div>
+</div>
+{% endblock %}

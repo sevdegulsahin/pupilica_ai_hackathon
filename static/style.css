@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+
+:root {
+    --primary-color: #3B82F6;
+    --background-color: #F3F4F6;
+    --surface-color: #FFFFFF;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --border-color: #E5E7EB;
+    --error-color: #EF4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sayfa Konteynerleri */
+.page {
+    display: none; /* Varsayılan olarak tüm sayfalar gizli */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+.page.active {
+    display: flex; /* Sadece aktif sayfa görünür */
+}
+
+/* Genel Form Stilleri */
+.form-container {
+    background-color: var(--surface-color);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    width: 100%;
+}
+input, select, button {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 14px;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+}
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+button {
+    background: linear-gradient(to right, #3B82F6, #60A5FA);
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+}
+button:hover { transform: translateY(-2px); }
+h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+.form-group { margin-bottom: 1.25rem; }
+
+/* 1. Giriş Sayfası Stilleri */
+#auth-page .form-container { max-width: 450px; }
+.auth-toggle {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* 2. Profil Sayfası Stilleri */
+#profile-page .form-container { max-width: 700px; }
+#profile-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+}
+.full-width { grid-column: 1 / -1; }
+
+/* 3. Ana Uygulama Sayfası Stilleri */
+#app-page {
+    padding: 2rem;
+    align-items: flex-start; /* Sayfayı yukarı yasla */
+}
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    height: calc(100vh - 4rem);
+    background-color: var(--surface-color);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+}
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+.header-actions button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+    width: auto;
+}
+#logout-button { background: var(--error-color); }
+.app-main { display: flex; flex: 1; overflow: hidden; }
+.chat-container { flex: 2; display: flex; flex-direction: column; border-right: 1px solid var(--border-color); }
+#chat-messages { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+.message { padding: 0.75rem 1.25rem; border-radius: 1.25rem; max-width: 75%; line-height: 1.6; }
+.user-message { background-color: var(--primary-color); color: white; align-self: flex-end; border-bottom-right-radius: 0.5rem; }
+.ai-message { background-color: var(--background-color); color: var(--text-primary); align-self: flex-start; border-bottom-left-radius: 0.5rem; }
+.chat-input-area { display: flex; padding: 1rem; border-top: 1px solid var(--border-color); }
+#chat-input { flex: 1; margin-right: 0.75rem; }
+#send-button { width: 50px; flex-shrink: 0; }
+.recipe-container { flex: 3; padding: 2rem; overflow-y: auto; background-color: #FAFBFC; }
+.recipe-placeholder { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; color: #9CA3AF; text-align: center; }
+.recipe-placeholder i { font-size: 3rem; margin-bottom: 1rem; }
+/* === WIZARD STYLES === */
+.wizard-container { max-width: 700px; }
+.wizard-step { display: none; }
+.wizard-step.active { display: block; animation: fadeIn 0.5s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.step-subtitle { text-align: center; margin-bottom: 2.5rem; color: var(--text-secondary); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; }
+.wizard-navigation { display: flex; justify-content: space-between; margin-top: 2rem; }
+.wizard-navigation button { width: 48%; }
+#prevBtn { background: var(--text-secondary); }
+.checkbox-group label { display: block; font-weight: 500; margin-bottom: 1rem; }
+.checkbox-group > div { display: flex; align-items: center; margin-bottom: 0.75rem; }
+.checkbox-group input[type="checkbox"] { width: auto; margin-right: 10px; }
+
+/* Progress Bar */
+.progress-bar { display: flex; justify-content: space-between; margin-bottom: 2rem; }
+.progress-step {
+    width: 35px; height: 35px; border-radius: 50%;
+    background-color: var(--border-color); color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; transition: all 0.3s ease;
+    position: relative;
+}
+.progress-step.active { background-color: var(--primary-color); color: white; }
+.progress-step:not(:last-child)::after {
+    content: ''; height: 2px; width: 220%;
+    background-color: var(--border-color);
+    position: absolute; top: 50%; left: 50%; transform: translateY(-50%);
+    z-index: -1;
+}
+/* === YENİ STİLLER === */
+
+/* Header Navigasyon */
+.app-header { align-items: center; }
+.header-nav { display: flex; gap: 1rem; }
+.nav-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+.nav-link:hover { background-color: var(--background-color); color: var(--text-primary); }
+.nav-link.active { background-color: var(--primary-color); color: white; }
+
+/* Profil Butonu */
+.profile-button {
+    text-decoration: none;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+.profile-button:hover { background-color: #E5E7EB; }
+
+/* Dashboard Stilleri */
+.dashboard-main { padding: 2rem; text-align: center; }
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    text-align: left;
+}
+.card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+.card-icon { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+.card h3 { font-size: 1.125rem; }
+.card p { color: var(--text-secondary); margin-top: 0.5rem; }
+.card-button {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.wizard-navigation button {
+    width: 150px; /* Genişliği küçültüyoruz */
+    padding: 12px; /* Dikey padding'i azaltıyoruz */
+}
+/* === YENİ: GLOBAL HEADER STİLLERİ === */
+.global-header {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Sayfa kaysa bile sabit kalır */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+.logo i { color: var(--primary-color); }
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    color: var(--text-secondary);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.profile-icon:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.login-button {
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Sayfa içeriğinin header'ın altına itilmesi için */
+.page-content {
+    padding-top: 80px; /* Header'ın yüksekliği kadar boşluk bırak */
+}
+/* === YENİ: PROFİL GÖRÜNTÜLEME SAYFASI STİLLERİ === */
+.profile-view-container {
+    background-color: var(--surface-color);
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+.profile-header { margin-bottom: 2rem; }
+.profile-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.profile-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+.detail-card {
+    background-color: var(--background-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+.detail-card h4 { margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;}
+.detail-card p { margin-bottom: 0.5rem; }
+.detail-card span { color: var(--text-secondary); }
+
+.edit-profile-button {
+    display: inline-block;
+    text-decoration: none;
+    background: linear-gradient(to right, #3B82F6, #60A5FA);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
