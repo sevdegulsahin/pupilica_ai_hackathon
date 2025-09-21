@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Sayfa başlığı, her sayfada özel olarak belirlenecek -->
     <title>{% block title %}NutriChat AI{% endblock %}</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- style.css dosyasını doğru şekilde çağırıyoruz -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <!-- ============================================== -->
-    <!-- TÜM SAYFALARDA GÖRÜNECEK SABİT HEADER         -->
-    <!-- ============================================== -->
+<!-- script.js'in hangi sayfada olduğunu anlaması için body'ye id ekliyoruz -->
+
+<body id="{% block body_id %}{% endblock %}">
     <header class="global-header">
-        <a href="/" class="logo">
+        <a href="{{ url_for('index_page') }}" class="logo">
             <i class="fa-solid fa-seedling"></i>
             <strong>NutriChat AI</strong>
         </a>
         <div class="header-actions">
-    {% if user_logged_in %}
-        <!-- DEĞİŞİKLİK: Link artık /profil'e gidiyor -->
-        <a href="/profil" class="profile-icon" title="Profilim">
-            <i class="fa-solid fa-user"></i>
-        </a>
-        <button id="logout-button" onclick="app.logout()">Çıkış Yap</button>
-    {% else %}
-        <!-- ... -->
-    {% endif %}
-</div>
+            {% if user_logged_in %}
+            <a href="{{ url_for('dashboard_page') }}" class="nav-link">Gösterge Paneli</a>
+            <a href="{{ url_for('app_page') }}" class="nav-link">Sohbet Asistanı</a>
+            <a href="{{ url_for('view_profile_page') }}" class="profile-icon" title="Profilim">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <button id="logout-button" onclick="app.logout()">Çıkış Yap</button>
+            {% else %}
+            <!-- Giriş yapmamış kullanıcılar için bir buton (isteğe bağlı) -->
+            {% endif %}
+        </div>
     </header>
 
-    <!-- ============================================== -->
-    <!-- SAYFA İÇERİĞİNİN GELECEĞİ ALAN                -->
-    <!-- ============================================== -->
     <main class="page-content">
         {% block content %}{% endblock %}
     </main>
-    
-    <script src="/static/script.js"></script>
+
+    <!-- script.js dosyasını en sona, doğru şekilde çağırıyoruz -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
+
 </html>

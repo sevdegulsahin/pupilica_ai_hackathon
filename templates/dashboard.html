@@ -1,39 +1,84 @@
-<!-- Bu sayfa, _layout.html'deki genel iskeleti kullanır -->
 {% extends "_layout.html" %}
 
-<!-- Sayfa başlığını özelleştirir -->
-{% block title %}Ana Sayfa - NutriChat AI{% endblock %}
+{% block title %}Gösterge Paneli - NutriChat AI{% endblock %}
 
-<!-- Sayfanın ana içeriğini iskeletin içine yerleştirir -->
+{% block body_id %}dashboard-page-body{% endblock %}
+
 {% block content %}
-<div class="page active" id="dashboard-page-body">
+<div class="page active" id="dashboard-content">
     <div class="dashboard-container">
         <header class="dashboard-header">
             <h2>Hoş Geldiniz!</h2>
             <p class="subtitle">Sağlıklı yaşam yolculuğunuza başlamak için hazırsınız.</p>
         </header>
-        
-        <div class="dashboard-cards">
-            <!-- Ana Hedef Kartı -->
-            <div class="card">
+
+        <!-- YENİ ve DÜZENLENMİŞ: Durum Paneli (4 Kartlı) -->
+        <div class="dashboard-status">
+
+            <!-- 1. Kart: Su Takip -->
+            <div class="status-card">
+                <i class="fa-solid fa-glass-water card-icon"></i>
+                <h3>Su Tüketimi</h3>
+                <p class="status-metric"><span id="water-count">0</span> / 8 Bardak</p>
+                <div class="status-actions">
+                    <button id="remove-water-btn" class="water-btn">-</button>
+                    <button id="add-water-btn" class="water-btn">+</button>
+                </div>
+            </div>
+
+            <!-- 2. Kart: Kalori Takip -->
+            <div class="status-card">
+                <i class="fa-solid fa-fire-flame-curved card-icon"></i>
+                <h3>Günlük Kalori</h3>
+                <p class="status-metric"><span id="calories-consumed">0</span> / <span id="calories-target">2000</span>
+                    kcal</p>
+                <div class="progress-bar-container">
+                    <div id="calories-progress" class="progress-bar"></div>
+                </div>
+            </div>
+
+            <!-- 3. Kart: Ana Hedef -->
+            <div class="status-card">
                 <i class="fa-solid fa-bullseye card-icon"></i>
                 <h3>Ana Hedefiniz</h3>
-                <p id="target-info">Yükleniyor...</p>
+                <p id="target-info" class="status-metric single-metric">Yükleniyor...</p>
             </div>
-            
-            <!-- Vücut Kitle İndeksi Kartı -->
-            <div class="card">
-                <i class="fa-solid fa-weight-scale card-icon"></i>
-                <h3>Vücut Kitle İndeksi (VKİ)</h3>
-                <p id="bmi-info">Yükleniyor...</p>
+
+            <!-- 4. Kart: HAFTALIK PLANLAYICI (EKSİK OLAN KISIM) -->
+            <div class="status-card">
+                <i class="fa-solid fa-calendar-week card-icon"></i>
+                <h3>Haftalık Planlayıcı</h3>
+                <p>Tüm haftanız için menüler oluşturun ve alışveriş listenizi hazırlayın.</p>
+                <a href="{{ url_for('weekly_plan_page') }}" class="card-button" style="margin-top: 1rem;">Plana Git</a>
             </div>
-            
-            <!-- Sohbet Asistanı Kartı -->
-            <div class="card quick-start-card">
-                 <i class="fa-solid fa-comments card-icon"></i>
-                <h3>Hızlı Başlangıç</h3>
-                <p>Sohbet asistanına giderek kişiselleştirilmiş öneriler ve tarifler alın.</p>
-                <a href="/uygulama" class="card-button">Sohbete Başla</a>
+
+        </div>
+
+        <!-- Günün Menüsü (Tek ve Temizlenmiş Hali) -->
+        <div class="daily-menu-section">
+            <h2>Bugün Ne Yiyeceksiniz?</h2>
+            <div id="daily-recipes-container" class="recipes-grid">
+                <p id="recipes-loading">Kişiselleştirilmiş tarifleriniz hazırlanıyor...</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Tarif Detay Modalı (Sayfanın sonunda, block'un içinde kalmalı) -->
+<div id="recipe-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <img id="modal-recipe-image" src="" alt="Tarif Görseli" class="modal-image">
+        <h2 id="modal-recipe-title">Tarif Başlığı</h2>
+        <div class="modal-details-grid">
+            <div class="modal-ingredients">
+                <h3>Malzemeler</h3>
+                <ul id="modal-recipe-ingredients"></ul>
+            </div>
+            <div class="modal-instructions">
+                <h3>Yapılışı</h3>
+                <ol id="modal-recipe-instructions"></ol>
             </div>
         </div>
     </div>

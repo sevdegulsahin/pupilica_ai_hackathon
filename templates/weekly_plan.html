@@ -1,0 +1,43 @@
+{% extends "_layout.html" %}
+
+{% block title %}Haftalık Menü Planı - NutriChat AI{% endblock %}
+
+{% block body_id %}weekly-plan-page-body{% endblock %}
+
+{% block content %}
+<div class="page active" id="weekly-plan-content">
+    <div class="weekly-plan-container">
+        <header class="weekly-plan-header">
+            <h2>Haftalık Menü Planınız</h2>
+            <p>Size özel hazırlanan 7 günlük beslenme planınız. Afiyet olsun!</p>
+            <div class="plan-actions">
+                <button id="new-plan-btn" class="action-button">
+                    <i class="fa-solid fa-arrows-rotate"></i> Yeni Plan Oluştur
+                </button>
+                <button id="shopping-list-btn" class="action-button primary">
+                    <i class="fa-solid fa-cart-shopping"></i> Alışveriş Listesi Göster
+                </button>
+            </div>
+        </header>
+
+        <div id="plan-loading" style="display: none;">
+            <p>Haftalık planınız oluşturuluyor... Bu işlem 15-20 saniye sürebilir.</p>
+        </div>
+
+        <div class="weekly-grid" id="weekly-grid-container">
+            <!-- Haftalık Plan JavaScript tarafından buraya eklenecek -->
+        </div>
+    </div>
+</div>
+
+<!-- Alışveriş Listesi Modalı -->
+<div id="shopping-list-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Alışveriş Listeniz</h2>
+        <div id="shopping-list-content">
+            <!-- Liste kategorileri ve malzemeler JS ile buraya eklenecek -->
+        </div>
+    </div>
+</div>
+{% endblock %}
